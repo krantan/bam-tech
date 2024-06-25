@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "package", "package", "{8DD4B747-7C01-4195-B656-084CC450F7EC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "exercise1", "exercise1", "{084C27BE-6CEC-4087-8BA1-F81691743AAB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StargateAPI", "package\exercise1\api\StargateAPI.csproj", "{DD4A09BF-0B5B-44F4-B3D6-B7DAB25D4ABE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DD4A09BF-0B5B-44F4-B3D6-B7DAB25D4ABE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD4A09BF-0B5B-44F4-B3D6-B7DAB25D4ABE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD4A09BF-0B5B-44F4-B3D6-B7DAB25D4ABE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD4A09BF-0B5B-44F4-B3D6-B7DAB25D4ABE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{084C27BE-6CEC-4087-8BA1-F81691743AAB} = {8DD4B747-7C01-4195-B656-084CC450F7EC}
+		{DD4A09BF-0B5B-44F4-B3D6-B7DAB25D4ABE} = {084C27BE-6CEC-4087-8BA1-F81691743AAB}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7D76144F-F157-4B4B-9A57-D42B7F57EAD8}
+	EndGlobalSection
+EndGlobal
