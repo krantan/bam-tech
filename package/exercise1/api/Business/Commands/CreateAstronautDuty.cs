@@ -88,9 +88,12 @@ namespace StargateAPI.Business.Commands
         {
             DateTime dutyStartDate = request.DutyStartDate ?? DateTime.Now.AddDays(1);
 
-            var query = $"SELECT * FROM [Person] WHERE \'{request.Name}\' = Name";
+            var query = @"SELECT * FROM [Person] WHERE Name=@Name";
 
-            var person = await _context.Connection.QueryFirstOrDefaultAsync<Person>(query);
+            var person = await _context.Connection.QueryFirstOrDefaultAsync<Person>(query, new
+                {
+                    Name = request.Name
+                });
 
             if (person is null)
             {
@@ -99,9 +102,12 @@ namespace StargateAPI.Business.Commands
                 throw new BadHttpRequestException($"Bad Request::{message}");
             }
 
-            query = $"SELECT * FROM [AstronautDetail] WHERE {person.Id} = PersonId";
+            query = @"SELECT * FROM [AstronautDetail] WHERE PersonId=@Id";
 
-            var astronautDetail = await _context.Connection.QueryFirstOrDefaultAsync<AstronautDetail>(query);
+            var astronautDetail = await _context.Connection.QueryFirstOrDefaultAsync<AstronautDetail>(query, new
+                {
+                    Id = person.Id
+                });
             if (astronautDetail is null)
             {
                 astronautDetail = new AstronautDetail
@@ -130,9 +136,12 @@ namespace StargateAPI.Business.Commands
                 _context.AstronautDetails.Update(astronautDetail);
             }
 
-            query = $"SELECT * FROM [AstronautDuty] WHERE {person.Id} = PersonId Order By DutyStartDate Desc";
+            query = @"SELECT * FROM [AstronautDuty] WHERE PersonId=@Id Order By DutyStartDate Desc";
 
-            var astronautDuty = await _context.Connection.QueryFirstOrDefaultAsync<AstronautDuty>(query);
+            var astronautDuty = await _context.Connection.QueryFirstOrDefaultAsync<AstronautDuty>(query, new 
+                {
+                    Id = person.Id
+                });
 
             if (astronautDuty is not null)
             {
