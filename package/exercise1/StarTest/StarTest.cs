@@ -117,7 +117,6 @@ public class UnitTest1
         {
             using (var context = factory.CreateContext())
             {
-                Console.WriteLine("in a throws");
                 var getPreProcessor = new CreateAstronautDutyPreProcessor(context);
                 var getRequest = new CreateAstronautDuty(){
                     Name = "Test Retired",
