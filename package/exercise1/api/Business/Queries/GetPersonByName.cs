@@ -29,6 +29,8 @@ namespace StargateAPI.Business.Queries
 
             result.Person = person.FirstOrDefault();
 
+            _context.LogStatus($"QUERY: GetPersonByNameHandler NAME: {request.Name} ID: {result.Person?.PersonId.ToString() ?? "Not Found"}");
+
             return result;
         }
     }

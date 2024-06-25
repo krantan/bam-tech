@@ -20,9 +20,16 @@ namespace StargateAPI.Business.Commands
         }
         public Task Process(CreatePerson request, CancellationToken cancellationToken)
         {
+
             var person = _context.People.AsNoTracking().FirstOrDefault(z => z.Name == request.Name);
 
-            if (person is not null) throw new BadHttpRequestException("Bad Request");
+            if (person is not null) {
+                var message = $"Person Exists `{person.Name}` `{person.Id}`.";
+                _context.LogError(message);
+                throw new BadHttpRequestException($"Bad Request::{message}");
+            }
+
+            _context.LogStatus($"PERSON `{request.Name}`");
 
             return Task.CompletedTask;
         }
@@ -38,27 +45,21 @@ namespace StargateAPI.Business.Commands
         }
         public async Task<CreatePersonResult> Handle(CreatePerson request, CancellationToken cancellationToken)
         {
-            if (request.Name == "") {
+                var newPerson = new Person()
+                {
+                   Name = request.Name
+                };
+
+                await _context.People.AddAsync(newPerson);
+
+                await _context.SaveChangesAsync();
+
+                _context.LogStatus($"QUERY: CreatePerson NAME: {request.Name} ID: {newPerson.Id}");
+
                 return new CreatePersonResult()
                 {
-                    Id = 0,
-                    Message = "ERROR::Invalid Name"
+                    Id = newPerson.Id
                 };
-            }
-
-            var newPerson = new Person()
-            {
-                Name = request.Name
-            };
-
-            await _context.People.AddAsync(newPerson);
-
-            await _context.SaveChangesAsync();
-
-            return new CreatePersonResult()
-            {
-                Id = newPerson.Id
-            };          
         }
     }
 

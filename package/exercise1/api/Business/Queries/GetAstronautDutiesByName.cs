@@ -29,15 +29,22 @@ namespace StargateAPI.Business.Queries
 
             var person = await _context.Connection.QueryFirstOrDefaultAsync<PersonAstronaut>(query);
 
-            result.Person = person;
+            if (person is null)
+            {
+                var message = $"Invalid Person `{request.Name}`";
+                _context.LogError(message);
+                throw new BadHttpRequestException($"Bad Request::{message}");
+            }
 
             query = $"SELECT * FROM [AstronautDuty] WHERE {person.PersonId} = PersonId Order By DutyStartDate Desc";
 
             var duties = await _context.Connection.QueryAsync<AstronautDuty>(query);
 
-            result.AstronautDuties = duties.ToList();
-
-            return result;
+            return new GetAstronautDutiesByNameResult()
+            {
+                Person = person,
+                AstronautDuties = duties.ToList()
+            };
 
         }
     }

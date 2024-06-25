@@ -70,6 +70,16 @@ namespace StargateAPI.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "AppLog",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Type = table.Column<string>(type: "TEXT", nullable: false),
+                    EventDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Message = table.Column<string>(type: "TEXT", nullable: false)
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AstronautDetail_PersonId",
                 table: "AstronautDetail",
@@ -93,6 +103,12 @@ namespace StargateAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "Person");
+
+            migrationBuilder.DropTable(
+                name: "AppLog");
+
+            migrationBuilder.DropTable(
+                name: "AppLogType");
         }
     }
 }
