@@ -8,7 +8,7 @@ namespace StargateAPI.Business.Data
     [Table("AppLog")]
     public class AppLog
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         public DateTime EventDate { get; set; } = DateTime.Now;
 

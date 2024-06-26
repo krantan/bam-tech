@@ -57,7 +57,7 @@ public class UnitTest1
     }
 
     [Fact]
-    public async Task Astronaut_NoDuty_Null()
+    public async Task Astronaut_NoDuty_Test()
     {
         using (var factory = new DbContextFactory())
         {
@@ -69,6 +69,24 @@ public class UnitTest1
                 };
                 var getResult = await getHandler.Handle(getRequest, CancellationToken.None);
                 Assert.Null(getResult.Person);
+            }
+        }
+    }
+
+    [Fact]
+    public void Astronaut_SingleDuty_Test()
+    {
+        using (var factory = new DbContextFactory())
+        {
+            using (var context = factory.CreateContext())
+            {
+                var command = factory.GetCommand(
+                    @"select PersonId, count(*) AS cnt from [AstronautDuty] WHERE DutyEndDate is null group by PersonId HAVING cnt>1"
+                );
+                using (var reader = command.ExecuteReader())
+                {
+                    Assert.False(reader.HasRows);
+                }
             }
         }
     }

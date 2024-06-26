@@ -147,6 +147,7 @@ namespace StargateAPI.Business.Commands
             {
                 _context.LogStatus($"DUTY UPDATED ID: {person.Id} DUTY: {astronautDuty.DutyTitle}");
                 astronautDuty.DutyEndDate = dutyStartDate.AddDays(-1).Date;
+                _context.ChangeTracker.Clear();
                 _context.AstronautDuties.Update(astronautDuty);
             }
 

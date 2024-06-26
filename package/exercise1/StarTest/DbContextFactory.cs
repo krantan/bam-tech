@@ -1,11 +1,12 @@
+using System.Data;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using StargateAPI.Business.Data;
-
 
 public class DbContextFactory : IDisposable
 {
-    private SqliteConnection _connection;
+    private SqliteConnection? _connection;
 
     private DbContextOptions<StargateContext> CreateOptions()
     {
@@ -28,6 +29,11 @@ public class DbContextFactory : IDisposable
         }
 
         return new StargateContext(CreateOptions());
+    }
+
+    public SqliteCommand GetCommand(string query)
+    {
+        return new SqliteCommand(query, _connection);
     }
 
     public void Dispose()

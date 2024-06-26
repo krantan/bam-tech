@@ -29,7 +29,7 @@ namespace StargateAPI.Business.Data
         {
             await LogItem(new AppLog()
             {
-                Id = System.Guid.NewGuid(),
+                Id = System.Guid.NewGuid().ToString(),
                 Message = message,
                 Type = "S"
             });
@@ -39,7 +39,7 @@ namespace StargateAPI.Business.Data
         {
             await LogItem(new AppLog()
             {
-                Id = System.Guid.NewGuid(),
+                Id = System.Guid.NewGuid().ToString(),
                 Message = message,
                 Type = "E"
             });
@@ -121,8 +121,9 @@ namespace StargateAPI.Business.Data
                     {
                         Id = 2,
                         PersonId = 3,
-                        DutyStartDate = new DateTime(2024, 1, 1),
-                        DutyTitle = "Space Cowboy",
+                        DutyStartDate = new DateTime(2023, 1, 1),
+                        DutyEndDate = new DateTime(2022, 12, 31),
+                        DutyTitle = "Traveler",
                         Rank = "1LT"
                     },
                     new AstronautDuty
@@ -138,6 +139,7 @@ namespace StargateAPI.Business.Data
                         Id = 4,
                         PersonId = 4,
                         DutyStartDate = new DateTime(2022, 1, 1),
+                        DutyEndDate = new DateTime(2022, 12, 31),
                         DutyTitle = "Navigation",
                         Rank = "1LT"
                     },
